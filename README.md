@@ -106,14 +106,6 @@ src
 
 ---
 
-## 🌐 Live Demo
-
-🚀 **Application:** 
-
-https://stock-forage-lake.vercel.app/login
-
----
-
 ## 🎯 Project Highlights
 
 - Modern SaaS-inspired Dashboard
