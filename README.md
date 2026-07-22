@@ -108,9 +108,9 @@ src
 
 ## 🌐 Live Demo
 
-🚀 **Application:** *Coming Soon*
+🚀 **Application:** 
 
-> The project will be deployed soon. The live demo link will be updated here.
+https://stock-forage-lake.vercel.app/login
 
 ---
 
