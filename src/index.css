@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================
+   CSS Custom Properties (Design Tokens)
+   ========================================= */
+:root {
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 68px;
+  --header-height: 64px;
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+}
+
+/* =========================================
+   Base Reset & Typography
+   ========================================= */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-sans text-dark-900 bg-dark-50 min-h-screen;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  .dark body {
+    @apply text-dark-100 bg-dark-950;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-dark-300 dark:bg-dark-600 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-dark-400 dark:bg-dark-500;
+  }
+
+  /* Focus styles */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-white dark:ring-offset-dark-900 rounded;
+  }
+
+  input, textarea, select {
+    @apply outline-none;
+  }
+}
+
+/* =========================================
+   Component Utilities
+   ========================================= */
+@layer components {
+  /* Glass cards */
+  .glass {
+    @apply bg-white/70 dark:bg-dark-800/60 backdrop-blur-md border border-white/20 dark:border-white/[0.06];
+  }
+
+  .glass-dark {
+    @apply bg-dark-900/80 backdrop-blur-md border border-white/[0.06];
+  }
+
+  /* Gradient border */
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(var(--tw-gradient-from), var(--tw-gradient-to));
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(97,114,245,0.6), rgba(20,184,166,0.3));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Shimmer loading effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.08) 50%,
+      rgba(255,255,255,0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Sidebar */
+  .sidebar-link {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
+           text-dark-500 dark:text-dark-400 
+           hover:bg-dark-100 dark:hover:bg-dark-800 
+           hover:text-dark-900 dark:hover:text-white
+           transition-all duration-150 cursor-pointer select-none;
+  }
+
+  .sidebar-link.active {
+    @apply bg-brand-600/10 dark:bg-brand-500/10 text-brand-600 dark:text-brand-400;
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  /* Stat card */
+  .stat-card {
+    @apply glass rounded-2xl p-5 hover:shadow-glass transition-shadow duration-200;
+  }
+
+  /* Table styles */
+  .data-table {
+    @apply w-full text-sm;
+  }
+
+  .data-table th {
+    @apply text-left font-medium text-dark-500 dark:text-dark-400 px-4 py-3 border-b border-dark-100 dark:border-dark-800;
+  }
+
+  .data-table td {
+    @apply px-4 py-3.5 border-b border-dark-50 dark:border-dark-800/50;
+  }
+
+  .data-table tr:hover td {
+    @apply bg-dark-50/50 dark:bg-dark-800/30;
+  }
+
+  /* Page header */
+  .page-header {
+    @apply mb-6;
+  }
+
+  .page-title {
+    @apply text-2xl font-display font-bold text-dark-900 dark:text-white;
+  }
+
+  .page-subtitle {
+    @apply text-sm text-dark-500 dark:text-dark-400 mt-0.5;
+  }
+}
+
+/* =========================================
+   Utility Overrides
+   ========================================= */
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-500 to-info-500 bg-clip-text text-transparent;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* =========================================
+   Dark Mode Backgrounds
+   ========================================= */
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  background-color: #060c1a;
+  background-image:
+    radial-gradient(at 20% 10%, hsla(248,80%,60%,0.08) 0, transparent 60%),
+    radial-gradient(at 80% 90%, hsla(189,80%,50%,0.06) 0, transparent 60%);
+}
+
+/* =========================================
+   Recharts Overrides
+   ========================================= */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(148,163,192,0.15) !important;
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  @apply !bg-dark-800 !border-dark-700 !rounded-xl !shadow-glass;
+}
+
+.recharts-legend-item-text {
+  @apply !text-dark-400 !text-xs;
+}
